@@ -1,15 +1,19 @@
-import { Transmuter, listen } from './transmuter.js';
+import { TransmuterStore, listen } from './transmuter-store.js';
 
 // Set up intial state
 const initialState = {
   name: 'lala',
   isIt: true,
   count: 123,
+  items: [1, 2, 3],
+  config: {
+    debug: false,
+  },
 };
 
 // Setup store
 const storeName = 'shed';
-const store = new Transmuter(storeName, initialState);
+const store = new TransmuterStore(storeName, initialState);
 
 // Logger factory
 const logger = name => (prop, value, oldValue) => {
@@ -25,7 +29,7 @@ const logger = name => (prop, value, oldValue) => {
 const listener1 = listen(store, 'name', logger('single prop'));
 
 // Listen to multiple props
-const listener2 = listen(store, ['name', 'count', 'isIt'], logger('multiple props'));
+const listener2 = listen(store, ['items', 'config'], logger('multiple props'));
 
 // Listen to props that don't exist yet
 const listener3 = listen(store, 'notYet', logger('non-existing prop'));
@@ -39,6 +43,8 @@ listener2.removeProp('isIt');
 // Modify store state
 store.state.name = 'testing!';
 store.state.count = 456;
+store.state.items = [...store.state.items, 4];
+store.state.config = { ...store.state.config, debug: true };
 store.state.notYet = 'yes!'; // Set non-existent property
 
 // Stop listener
@@ -47,6 +53,8 @@ listener1.stop();
 // Modify store state again
 store.state.name = 'testing again!';
 store.state.notYet = 'uhuh!';
+store.state.items = [...store.state.items, 5];
+store.state.config = { ...store.state.config, debug: true };
 
 // Start listener again
 listener1.start();
