@@ -68,7 +68,7 @@ store.state.items = [...store.state.items, 4];
 
 ## Limitations
 
-As a `Proxy` only watches direct properties of the object it wraps, changes to nested objects or items in arrays won't propagate to the `set` handler. Use array/object destructuring for this and assigning the new result directly to the store, or use something like [Immutable.js](https://github.com/facebook/immutable-js/).
+As a `set` handler of a `Proxy` only watches direct properties of the object it wraps, changes to nested objects or items in arrays won't propagate to the `set` handler. Use array/object destructuring for this and assigning the new result directly to the store, or use something like [Immutable.js](https://github.com/facebook/immutable-js/).
 
 **Plain JS, does _not_ trigger event**:
 
