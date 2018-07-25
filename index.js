@@ -1,4 +1,4 @@
-import { Store, listen } from './store.js';
+import { Transmuter, listen } from './transmuter.js';
 
 // Set up intial state
 const initialState = {
@@ -9,9 +9,9 @@ const initialState = {
 
 // Setup store
 const storeName = 'shed';
-const store = new Store(storeName, initialState);
+const store = new Transmuter(storeName, initialState);
 
-// Setup loggers
+// Logger factory
 const logger = name => (prop, value, oldValue) => {
   document.body.insertAdjacentHTML(
     'afterbegin',
@@ -34,11 +34,10 @@ const listener3 = listen(store, 'notYet', logger('non-existing prop'));
 listener1.addProp('count');
 
 // Remove prop from a listener
-listener2.removeProp('name');
+listener2.removeProp('isIt');
 
 // Modify store state
 store.state.name = 'testing!';
-store.state.isIt = {};
 store.state.count = 456;
 store.state.notYet = 'yes!'; // Set non-existent property
 
@@ -47,9 +46,10 @@ listener1.stop();
 
 // Modify store state again
 store.state.name = 'testing again!';
-store.state.isIt = true;
-store.state.count = 789;
-store.state.foo = 'uhuh!';
+store.state.notYet = 'uhuh!';
 
 // Start listener again
 listener1.start();
+
+// More modifications!
+store.state.name = 'and again!';
