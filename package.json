@@ -11,7 +11,10 @@
     "state",
     "container"
   ],
-  "author": "",
+  "author": "Iain van der Wiel",
+  "repository": {
+    "url": "https://github.com/iainvdw/transmuter-store"
+  },
   "license": "MIT",
   "devDependencies": {
     "eslint": "^4.19.1",
