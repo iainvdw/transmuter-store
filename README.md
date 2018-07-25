@@ -102,6 +102,12 @@ const store = new TransmuterStore('store', initialState);
 store.state.items = store.state.items.push(4); // ✅
 ```
 
+## Roadmap
+
+- [ ] Watching nested objects, if possible.
+- [ ] Watching items in arrays, if possible.
+- [ ] Handle store property deletions
+
 ## Thanks
 
 [Heydon Pickering](http://www.heydonworks.com/), for inspiring me with [Mutilator.js](https://gist.github.com/Heydon/9de1a8b55dd1448281fad013503a5b7a) to research and develop this library.
