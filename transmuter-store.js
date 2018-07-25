@@ -5,9 +5,9 @@
  * @param {String} name Name of store
  * @param {Object} target Target object containing the state to watch
  * @param {Element} context Element or object to dispatch events on
- * @returns {Transmuter} Store object containing name, context and state Proxy
+ * @returns {TransmuterStore} Store object containing name, context and state Proxy
  */
-class Transmuter {
+class TransmuterStore {
   constructor(name, target, context = window) {
     this.name = name;
     this.context = context;
@@ -44,7 +44,7 @@ class Transmuter {
 
 /**
  * Store listener
- * @param {Transmuter} store Store object to listen to
+ * @param {TransmuterStore} store Store object to listen to
  * @param {String|Array} props Prop(s) of the store to watch
  * @param {Function} handler Handler function that's called when a property changes
  */
@@ -97,4 +97,4 @@ const listen = (store, props, handler) => {
   };
 };
 
-export { Transmuter, listen };
+export { TransmuterStore, listen };
