@@ -1,12 +1,16 @@
 {
-  "name": "transmuter",
+  "name": "transmuter-store",
   "version": "1.0.0",
-  "description": "",
+  "description": "Transmuter.js - simple state container store, fires events when property changes",
   "main": "transmuter.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "store",
+    "state",
+    "container"
+  ],
   "author": "",
   "license": "MIT",
   "devDependencies": {
