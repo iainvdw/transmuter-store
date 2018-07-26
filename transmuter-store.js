@@ -75,7 +75,7 @@ const listen = ({ storeName, context }, props, handler) => {
   // Add prop to listen to
   const addProp = (propToAdd) => {
     listenToProp(propToAdd);
-    propsToListen.push(propToAdd);
+    propsToListen = [...propsToListen, propToAdd];
   };
 
   // Remove listened prop
