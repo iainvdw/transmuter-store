@@ -49,7 +49,7 @@ class TransmuterStore {
  * @param {String|Array} props Prop(s) of the store to watch
  * @param {Function} handler Handler function that's called when a property changes
  */
-const listen = (store, props, handler) => {
+const listen = ({ storeName, context }, props, handler) => {
   // Concat props in new array. This allows strings and arrays of props to listen to.
   let propsToListen = [].concat(props);
 
@@ -62,7 +62,7 @@ const listen = (store, props, handler) => {
   };
 
   // Stop listening to single prop
-  const stopListeningToProp = prop => store.context.removeEventListener(`${store.name}:${prop}`, listener);
+  const stopListeningToProp = prop => context.removeEventListener(`${storeName}:${prop}`, listener);
 
   // Apply listener to watched props
   const start = () => {
