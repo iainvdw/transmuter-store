@@ -49,10 +49,11 @@ console.log(store.context); // window
 console.log(store.state); // State object Proxy, this is where the ✨ magic ✨ happens
 
 // Listener function. This is called when a property changes with the name of the prop, the new value and the old value.
-function logger(prop, value, oldValue) {
+function logger(prop, value, oldValue, state) {
   console.log('property:', prop);
   console.log('new value:', value);
   console.log('old value:', oldValue);
+  console.log('new state:', state);
 }
 
 // Add a store listener that listens to both the items and isMenuOpen properties and calls the above logger() function`
