@@ -61,22 +61,16 @@ const listen = ({ storeName, context }, props, handler) => {
   }) => handler(prop, value, oldValue, state);
 
   // Listen to single prop
-  const listenToProp = (prop) => {
-    store.context.addEventListener(`${store.name}:${prop}`, listener);
-  };
+  const listenToProp = prop => context.addEventListener(`${storeName}:${prop}`, listener);
 
   // Stop listening to single prop
   const stopListeningToProp = prop => context.removeEventListener(`${storeName}:${prop}`, listener);
 
   // Apply listener to watched props
-  const start = () => {
-    propsToListen.forEach(listenToProp);
-  };
+  const start = () => propsToListen.forEach(listenToProp);
 
   // Remove listener to watched props
-  const stop = () => {
-    propsToListen.forEach(stopListeningToProp);
-  };
+  const stop = () => propsToListen.forEach(stopListeningToProp);
 
   // Add prop to listen to
   const addProp = (propToAdd) => {
