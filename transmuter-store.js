@@ -54,7 +54,11 @@ const listen = ({ storeName, context }, props, handler) => {
   let propsToListen = [].concat(props);
 
   // Listener callback that destructures values from event.detail
-  const listener = ({ detail: { prop, value, oldValue } }) => handler(prop, value, oldValue);
+  const listener = ({
+    detail: {
+      prop, value, oldValue, state,
+    },
+  }) => handler(prop, value, oldValue, state);
 
   // Listen to single prop
   const listenToProp = (prop) => {
