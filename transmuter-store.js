@@ -24,7 +24,7 @@ class TransmuterStore {
             prop,
             value,
             oldValue: store[prop],
-            state: store.state,
+            state: this.state,
           },
         });
 
