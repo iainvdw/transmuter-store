@@ -11,37 +11,34 @@ class TransmuterStore {
   constructor(name, target, context = window) {
     this.name = name;
     this.context = context;
-    this.state = new Proxy(target, {
-      set: (store, prop, value) => {
-        // Return early if value hasn't changed
-        if (store[prop] === value) {
-          return true;
-        }
-
-        // Setup custom event
-        const event = new CustomEvent(`${name}:${prop}`, {
-          detail: {
-            prop,
-            value,
-            oldValue: store[prop],
-            state: this.state,
-          },
-        });
-
-        // Set value like normal
-        const success = Reflect.set(store, prop, value);
-
-        if (success) {
-          // Dispatch name:prop event on context
-          this.context.dispatchEvent(event);
-        }
-
-        // Assignment of property in store succeeded, required per strict mode
-        return success;
-      },
-    });
+    this.state = new Proxy(target, TransmuterStore.createHandler(this));
   }
 }
+
+TransmuterStore.createHandler = store => ['set', 'deleteProperty', 'apply', 'defineProperty'].reduce((handler, method) => {
+  handler[method] = (state, prop, value) => {
+    const success = Reflect[method](state, prop, value);
+
+    if (success) {
+      // Setup custom event
+      const event = new CustomEvent(`${store.name}:${prop}`, {
+        detail: {
+          prop,
+          value,
+          oldValue: state[prop],
+          state: store.state,
+        },
+      });
+
+        // Dispatch name:prop event on context
+      store.context.dispatchEvent(event);
+    }
+
+    return success;
+  };
+
+  return handler;
+}, {});
 
 /**
  * Store listener
