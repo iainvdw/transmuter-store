@@ -1,6 +1,6 @@
 {
   "name": "transmuter-store",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Transmuter.js - simple state container store, fires events when property changes",
   "main": "transmuter-store.js",
   "scripts": {
